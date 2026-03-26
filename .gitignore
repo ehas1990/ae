@@ -1,0 +1,24 @@
+# WordPress core (keep only theme and uploads)
+wp-admin/
+wp-includes/
+wp-*.php
+index.php
+license.txt
+readme.html
+xmlrpc.php
+
+# Config with credentials
+wp-config.php
+
+# Content - keep only theme and uploads
+wp-content/plugins/
+wp-content/upgrade/
+wp-content/cache/
+wp-content/debug.log
+
+# Claude config
+.claude/
+
+# OS files
+.DS_Store
+Thumbs.db
