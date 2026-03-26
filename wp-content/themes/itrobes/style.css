@@ -628,19 +628,21 @@ body {
     display: flex;
     gap: 60px;
     margin-top: 50px;
+    align-items: flex-start;
 }
 
 .products-tabs {
     display: flex;
     flex-direction: column;
     gap: 0;
-    min-width: 280px;
+    min-width: 320px;
+    flex-shrink: 0;
 }
 
 .products-tab {
     background: none;
     border: none;
-    padding: 16px 24px;
+    padding: 18px 24px;
     text-align: left;
     cursor: pointer;
     color: rgba(255, 255, 255, 0.6);
@@ -651,7 +653,32 @@ body {
     border-radius: 8px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
+}
+
+.products-tab__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
+.products-tab__icon svg,
+.products-tab__icon img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.products-tab:hover .products-tab__icon svg,
+.products-tab:hover .products-tab__icon img,
+.products-tab--active .products-tab__icon svg,
+.products-tab--active .products-tab__icon img {
+    opacity: 1;
 }
 
 .products-tab:hover {
@@ -669,13 +696,18 @@ body {
 
 .products-panel {
     display: none;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    padding: 40px;
 }
 
 .products-panel--active {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.products-panel__text {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 40px;
 }
 
 .products-panel__desc {
@@ -688,7 +720,8 @@ body {
 .products-panel__img {
     width: 100%;
     border-radius: 12px;
-    margin-top: 24px;
+    max-height: 323px;
+    object-fit: cover;
 }
 
 /* ========================
@@ -1494,6 +1527,20 @@ body {
         white-space: nowrap;
         font-size: 14px;
         padding: 10px 16px;
+    }
+
+    .products-tab__icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .products-tab__icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .products-panel__text {
+        padding: 24px;
     }
 
     /* Trusted Mobile */

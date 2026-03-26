@@ -211,22 +211,43 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
         <h2 class="section-title section-title--light"><?php echo itrobes_field('products_title', 'Our Products'); ?></h2>
         <?php
         $products = itrobes_group_items('product', 7);
-        $prod_defaults = array('Project Management', 'Inventory', 'Estimation', 'Procurement', 'HRMS', 'Finance & Accounts', 'Stores');
+        $upload_url = home_url('/wp-content/uploads/2026/03/');
+        $prod_defaults = array(
+            array('title' => 'Project Management', 'icon' => $upload_url . 'icon-p1.svg'),
+            array('title' => 'Inventory', 'icon' => $upload_url . 'icon-p2.svg'),
+            array('title' => 'Estimation', 'icon' => $upload_url . 'icon-p3.svg'),
+            array('title' => 'Procurement', 'icon' => $upload_url . 'icon-p4.svg'),
+            array('title' => 'HRMS', 'icon' => $upload_url . 'icon-p5.svg'),
+            array('title' => 'Finance & Accounts', 'icon' => $upload_url . 'icon-p6.svg'),
+            array('title' => 'Stores', 'icon' => $upload_url . 'icon-p7.svg'),
+        );
+        $prod_descs = array(
+            'Manage tasks, timelines, and resources with our intuitive project management platform.',
+            'From tracking stock levels, managing purchases or monitoring sales to end-to-end inventory control, our platform helps you streamline operations and achieve the best outcomes.',
+            'Create accurate project estimates with our powerful estimation tools.',
+            'Streamline your procurement process from requisition to purchase order management.',
+            'Complete human resource management system for attendance, payroll, and employee lifecycle.',
+            'Manage your financial operations with comprehensive accounting and reporting tools.',
+            'Multi-store management with centralized inventory and sales tracking.',
+        );
         $has_products = !empty($products);
         $active_idx = $has_products ? 0 : 1;
         ?>
         <div class="products-layout">
             <div class="products-tabs">
                 <?php if ($has_products) :
-                    foreach ($products as $idx => $prod) : ?>
+                    foreach ($products as $idx => $prod) :
+                        $icon = $prod['icon'] ?? null; ?>
                         <button class="products-tab<?php echo $idx === 0 ? ' products-tab--active' : ''; ?>" data-tab="product-<?php echo $idx; ?>">
+                            <?php if ($icon) : ?><span class="products-tab__icon"><img src="<?php echo esc_url($icon['url']); ?>" alt=""></span><?php endif; ?>
                             <span class="products-tab__title"><?php echo esc_html($prod['title'] ?? ''); ?></span>
                         </button>
                     <?php endforeach;
                 else :
                     foreach ($prod_defaults as $idx => $tab) : ?>
                         <button class="products-tab<?php echo $idx === $active_idx ? ' products-tab--active' : ''; ?>" data-tab="product-<?php echo $idx; ?>">
-                            <span class="products-tab__title"><?php echo esc_html($tab); ?></span>
+                            <span class="products-tab__icon"><img src="<?php echo esc_url($tab['icon']); ?>" alt=""></span>
+                            <span class="products-tab__title"><?php echo esc_html($tab['title']); ?></span>
                         </button>
                     <?php endforeach;
                 endif; ?>
@@ -236,17 +257,23 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
                     foreach ($products as $idx => $prod) :
                         $img = $prod['image'] ?? null; ?>
                         <div class="products-panel<?php echo $idx === 0 ? ' products-panel--active' : ''; ?>" id="product-<?php echo $idx; ?>">
-                            <p class="products-panel__desc"><?php echo esc_html($prod['description'] ?? ''); ?></p>
-                            <?php if (!empty($prod['link'])) : ?><a href="<?php echo esc_url($prod['link']); ?>" class="link-arrow link-arrow--light">Read more <?php echo $arrow_sm; ?></a><?php endif; ?>
+                            <div class="products-panel__text">
+                                <p class="products-panel__desc"><?php echo esc_html($prod['description'] ?? ''); ?></p>
+                                <?php if (!empty($prod['link'])) : ?><a href="<?php echo esc_url($prod['link']); ?>" class="link-arrow link-arrow--light">Read more <?php echo $arrow_sm; ?></a><?php endif; ?>
+                            </div>
                             <?php if ($img) : ?><img src="<?php echo esc_url($img['url']); ?>" alt="<?php echo esc_attr($img['alt'] ?? ''); ?>" class="products-panel__img"><?php endif; ?>
                         </div>
                     <?php endforeach;
-                else : ?>
-                    <div class="products-panel products-panel--active" id="product-1">
-                        <p class="products-panel__desc">From tracking stock levels, managing purchases or monitoring sales to end-to-end inventory control, our platform helps you streamline operations and achieve the best outcomes.</p>
-                        <a href="#" class="link-arrow link-arrow--light">Read more <?php echo $arrow_sm; ?></a>
-                    </div>
-                <?php endif; ?>
+                else :
+                    foreach ($prod_defaults as $idx => $tab) : ?>
+                        <div class="products-panel<?php echo $idx === $active_idx ? ' products-panel--active' : ''; ?>" id="product-<?php echo $idx; ?>">
+                            <div class="products-panel__text">
+                                <p class="products-panel__desc"><?php echo esc_html($prod_descs[$idx]); ?></p>
+                                <a href="#" class="link-arrow link-arrow--light">Read more <?php echo $arrow_sm; ?></a>
+                            </div>
+                        </div>
+                    <?php endforeach;
+                endif; ?>
             </div>
         </div>
     </div>
