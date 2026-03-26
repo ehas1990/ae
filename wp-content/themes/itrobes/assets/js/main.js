@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var industriesSliderEl = document.querySelector('.industries-slider');
     if (industriesSliderEl && typeof Swiper !== 'undefined') {
         var industriesSwiper = new Swiper('.industries-slider', {
-            slidesPerView: 'auto',
+            slidesPerView: 4,
             spaceBetween: 24,
             loop: true,
             speed: 800,
@@ -57,6 +57,24 @@ document.addEventListener('DOMContentLoaded', function () {
             navigation: {
                 prevEl: '.industries-nav__prev',
                 nextEl: '.industries-nav__next',
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                    spaceBetween: 16,
+                },
+                600: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                900: {
+                    slidesPerView: 3,
+                    spaceBetween: 24,
+                },
+                1200: {
+                    slidesPerView: 4,
+                    spaceBetween: 24,
+                },
             },
         });
     }
@@ -111,11 +129,28 @@ document.addEventListener('DOMContentLoaded', function () {
     if (prevBtn) {
         prevBtn.addEventListener('click', function () {
             showTestimonial(currentIdx > 0 ? currentIdx - 1 : cards.length - 1);
+            resetAutoSlide();
         });
     }
     if (nextBtn) {
         nextBtn.addEventListener('click', function () {
             showTestimonial(currentIdx < cards.length - 1 ? currentIdx + 1 : 0);
+            resetAutoSlide();
         });
     }
+
+    // Auto slide every 5 seconds
+    var autoSlideTimer = null;
+    function startAutoSlide() {
+        if (cards.length > 1) {
+            autoSlideTimer = setInterval(function () {
+                showTestimonial(currentIdx < cards.length - 1 ? currentIdx + 1 : 0);
+            }, 5000);
+        }
+    }
+    function resetAutoSlide() {
+        clearInterval(autoSlideTimer);
+        startAutoSlide();
+    }
+    startAutoSlide();
 });

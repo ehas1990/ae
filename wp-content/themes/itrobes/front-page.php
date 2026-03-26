@@ -329,18 +329,40 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
                 <?php endforeach;
             else : ?>
                 <div class="testimonial-card testimonial-card--active">
-                    <div class="testimonial-card__image"></div>
+                    <div class="testimonial-card__image">
+                        <span class="testimonial-card__quote">&ldquo;</span>
+                    </div>
                     <div class="testimonial-card__content">
                         <p class="testimonial-card__text">iTrobes is a global web and digital marketing agency now expanding to serve the UAE. With a team of 100+ professionals and over 8 years of global experience, we've helped 500+ businesses succeed online.</p>
                         <h4 class="testimonial-card__name">Michael</h4>
                         <p class="testimonial-card__role">Huda, Marketing | Manager, Dubai Clinic</p>
                     </div>
                 </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-card__image">
+                        <span class="testimonial-card__quote">&ldquo;</span>
+                    </div>
+                    <div class="testimonial-card__content">
+                        <p class="testimonial-card__text">Working with iTrobes has transformed our digital presence. Their team delivered a stunning website and effective marketing strategy that increased our leads by 300% in just 6 months.</p>
+                        <h4 class="testimonial-card__name">Sarah Ahmed</h4>
+                        <p class="testimonial-card__role">CEO | Al Noor Properties, Dubai</p>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-card__image">
+                        <span class="testimonial-card__quote">&ldquo;</span>
+                    </div>
+                    <div class="testimonial-card__content">
+                        <p class="testimonial-card__text">The team at iTrobes understood our vision perfectly. They built a custom e-commerce platform that handles thousands of daily transactions seamlessly. Highly recommended for any UAE business.</p>
+                        <h4 class="testimonial-card__name">Ahmed Al Rashid</h4>
+                        <p class="testimonial-card__role">Founder | Gulf Tech Solutions, Abu Dhabi</p>
+                    </div>
+                </div>
             <?php endif; ?>
-        </div>
-        <div class="testimonials-nav">
-            <button class="testimonials-nav__btn testimonials-nav__prev" aria-label="Previous"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <button class="testimonials-nav__btn testimonials-nav__next" aria-label="Next"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="testimonials-nav">
+                <button class="testimonials-nav__btn testimonials-nav__prev" aria-label="Previous"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button class="testimonials-nav__btn testimonials-nav__next" aria-label="Next"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
         </div>
     </div>
 </section>
@@ -367,21 +389,28 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
             $industries = itrobes_group_items('industry', 5);
             if ($industries) :
                 foreach ($industries as $idx => $ind) :
-                    $icon = $ind['icon'] ?? null; ?>
+                    $icon = $ind['icon'] ?? null;
+                    $hover_img = $ind['image'] ?? null; ?>
                     <div class="swiper-slide">
                         <div class="industry-card">
-                            <span class="industry-card__num"><?php echo str_pad($idx + 1, 2, '0', STR_PAD_LEFT); ?></span>
-                            <h3 class="industry-card__title"><?php echo esc_html($ind['title'] ?? ''); ?></h3>
+                            <div class="industry-card__overlay" <?php if ($hover_img) : ?>style="background-image: url('<?php echo esc_url($hover_img['url']); ?>')"<?php endif; ?>></div>
+                            <div class="industry-card__info">
+                                <span class="industry-card__num"><?php echo str_pad($idx + 1, 2, '0', STR_PAD_LEFT); ?></span>
+                                <h3 class="industry-card__title"><?php echo str_replace('&amp;', '&amp;<br>', esc_html($ind['title'] ?? '')); ?></h3>
+                            </div>
                             <?php if ($icon) : ?><div class="industry-card__icon"><img src="<?php echo esc_url($icon['url']); ?>" alt=""></div><?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach;
             else :
-                foreach (array('Real Estate & Construction', 'Healthcare & Clinics', 'E-Commerce & Retail', 'Hospitality & Tourism', 'Education & EdTech') as $idx => $ind) : ?>
+                foreach (array('Real Estate &<br>Construction', 'Healthcare &<br>Clinics', 'E-Commerce &<br>Retail', 'Hospitality &<br>Tourism', 'Education &<br>EdTech') as $idx => $ind) : ?>
                     <div class="swiper-slide">
                         <div class="industry-card">
-                            <span class="industry-card__num"><?php echo str_pad($idx + 1, 2, '0', STR_PAD_LEFT); ?></span>
-                            <h3 class="industry-card__title"><?php echo esc_html($ind); ?></h3>
+                            <div class="industry-card__overlay"></div>
+                            <div class="industry-card__info">
+                                <span class="industry-card__num"><?php echo str_pad($idx + 1, 2, '0', STR_PAD_LEFT); ?></span>
+                                <h3 class="industry-card__title"><?php echo wp_kses_post($ind); ?></h3>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach;
