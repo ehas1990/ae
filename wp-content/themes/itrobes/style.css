@@ -282,6 +282,8 @@ body {
 
 .link-arrow--light {
     color: #a78bfa;
+    display: flex;
+    justify-content: end;
 }
 
 /* ========================
@@ -692,6 +694,7 @@ body {
 
 .products-content {
     flex: 1;
+    min-width: 0;
 }
 
 .products-panel {
@@ -699,27 +702,31 @@ body {
 }
 
 .products-panel--active {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 0px;
 }
 
 .products-panel__text {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
+    background: rgb(255 255 255);
+    border-radius: 0px;
     padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .products-panel__desc {
     font-size: 16px;
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.75);
+    color: #000000;
     margin-bottom: 24px;
 }
 
 .products-panel__img {
     width: 100%;
-    border-radius: 12px;
+    border-radius: 0px;
     max-height: 323px;
     object-fit: cover;
 }
@@ -760,6 +767,19 @@ body {
     gap: 40px 60px;
     align-items: center;
     justify-items: center;
+}
+
+@media (max-width: 1024px) and (min-width: 830px) {
+    .trusted-logos {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 35px 35px;
+    }
+    .faq-left {
+        flex: 0 0 200px !important;
+        position: relative;
+        min-height: 500px !important;
+    }
+}
 }
 
 .trusted-logo img {

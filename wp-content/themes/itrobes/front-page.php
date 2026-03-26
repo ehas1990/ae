@@ -210,7 +210,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
     <div class="products-container">
         <h2 class="section-title section-title--light"><?php echo itrobes_field('products_title', 'Our Products'); ?></h2>
         <?php
-        $products = itrobes_group_items('product', 7);
+        $products = itrobes_group_items('product', 8);
         $upload_url = home_url('/wp-content/uploads/2026/03/');
         $prod_defaults = array(
             array('title' => 'Project Management', 'icon' => $upload_url . 'icon-p1.svg'),
@@ -220,6 +220,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
             array('title' => 'HRMS', 'icon' => $upload_url . 'icon-p5.svg'),
             array('title' => 'Finance & Accounts', 'icon' => $upload_url . 'icon-p6.svg'),
             array('title' => 'Stores', 'icon' => $upload_url . 'icon-p7.svg'),
+            array('title' => 'Analytics', 'icon' => $upload_url . 'icon-p7.svg'),
         );
         $prod_descs = array(
             'Manage tasks, timelines, and resources with our intuitive project management platform.',
@@ -229,6 +230,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
             'Complete human resource management system for attendance, payroll, and employee lifecycle.',
             'Manage your financial operations with comprehensive accounting and reporting tools.',
             'Multi-store management with centralized inventory and sales tracking.',
+            'Data analytics and business reporting for informed decision-making.',
         );
         $has_products = !empty($products);
         $active_idx = $has_products ? 0 : 1;
