@@ -54,6 +54,7 @@
     </div>
 </footer>
 
+<div class="custom-cursor"><img src="<?php echo esc_url(home_url('/wp-content/uploads/2026/03/mo.png')); ?>" alt=""></div>
 <?php wp_footer(); ?>
 </body>
 </html>

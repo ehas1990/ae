@@ -74,14 +74,6 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
             <h2 class="section-title section-title--light"><?php echo itrobes_field('services_title', 'Our Services'); ?></h2>
             <div class="services-header__right">
                 <p class="section-desc section-desc--light"><?php echo itrobes_field('services_description', 'We provide end-to-end IT solutions — from development and design to cloud, consulting, and security — empowering businesses with technology that drives growth and innovation.'); ?></p>
-                <div class="services-nav">
-                    <button class="services-nav__btn services-nav__prev" aria-label="Previous">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </button>
-                    <button class="services-nav__btn services-nav__next" aria-label="Next">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </button>
-                </div>
             </div>
         </div>
     </div>
@@ -100,7 +92,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
                                 <?php if ($icon) : ?><div class="service-card__icon"><img src="<?php echo esc_url($icon['url']); ?>" alt="<?php echo esc_attr($icon['alt'] ?? ''); ?>"></div><?php endif; ?>
                                 <h3 class="service-card__title"><?php echo esc_html($svc['title'] ?? ''); ?></h3>
                                 <p class="service-card__desc"><?php echo esc_html($svc['description'] ?? ''); ?></p>
-                                <?php if (!empty($svc['link'])) : ?><a href="<?php echo esc_url($svc['link']); ?>" class="service-card__arrow" aria-label="Learn more"><?php echo $arrow_svg; ?></a><?php else : ?><span class="service-card__arrow"><?php echo $arrow_svg; ?></span><?php endif; ?>
+                                <?php if (!empty($svc['link'])) : ?><a href="<?php echo esc_url($svc['link']); ?>" class="service-card__arrow" aria-label="Learn more"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><?php else : ?><span class="service-card__arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><?php endif; ?>
                             </div>
                             <div class="service-card__image<?php echo !$img ? ' service-card__image--placeholder' : ''; ?>">
                                 <?php if ($img) : ?><img src="<?php echo esc_url($img['url']); ?>" alt=""><?php endif; ?>
@@ -123,7 +115,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
                             <div class="service-card__text">
                                 <h3 class="service-card__title"><?php echo $svc['t']; ?></h3>
                                 <p class="service-card__desc"><?php echo esc_html($svc['d']); ?></p>
-                                <span class="service-card__arrow"><?php echo $arrow_svg; ?></span>
+                                <span class="service-card__arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                             </div>
                             <div class="service-card__image service-card__image--placeholder"></div>
                         </div>
@@ -132,6 +124,10 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
             endif; ?>
         </div>
     </div>
+
+    <!-- Navigation (hidden, keyboard/swipe accessible) -->
+    <button class="services-nav__prev" aria-label="Previous" style="display:none;"></button>
+    <button class="services-nav__next" aria-label="Next" style="display:none;"></button>
 </section>
 
 <!-- Our Projects Section -->
@@ -170,38 +166,40 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
 
 <!-- Why Choose Us Section -->
 <section class="whychoose-section">
-    <div class="whychoose-header">
-        <div class="whychoose-header__left">
-            <span class="whychoose-icon"><img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/sparkle-icon.svg" alt=""></span>
-            <h2 class="section-title"><?php echo itrobes_field('whychoose_title', 'Why Choose Us'); ?></h2>
+    <div class="whychoose-container">
+        <div class="whychoose-header">
+            <div class="whychoose-header__left">
+                <span class="whychoose-icon"><img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/sparkle-icon.svg" alt=""></span>
+                <h2 class="section-title"><?php echo itrobes_field('whychoose_title', 'Why Choose Us'); ?></h2>
+            </div>
+            <p class="section-desc"><?php echo itrobes_field('whychoose_description', 'We provide end-to-end IT solutions — from development and design to cloud, consulting, and security — empowering businesses with technology that drives growth and innovation.'); ?></p>
         </div>
-        <p class="section-desc"><?php echo itrobes_field('whychoose_description', 'We provide end-to-end IT solutions — from development and design to cloud, consulting, and security — empowering businesses with technology that drives growth and innovation.'); ?></p>
-    </div>
-    <div class="whychoose-grid">
-        <?php
-        $features = itrobes_group_items('whychoose', 4);
-        if ($features) :
-            foreach ($features as $f) :
-                $icon = $f['icon'] ?? null; ?>
-                <div class="whychoose-card">
-                    <?php if ($icon) : ?><div class="whychoose-card__icon"><img src="<?php echo esc_url($icon['url']); ?>" alt=""></div><?php endif; ?>
-                    <h3 class="whychoose-card__title"><?php echo esc_html($f['title'] ?? ''); ?></h3>
-                    <p class="whychoose-card__desc"><?php echo esc_html($f['description'] ?? ''); ?></p>
-                </div>
-            <?php endforeach;
-        else :
-            foreach (array(
-                array('In-house Experts', 'Full-stack developers & certified marketers'),
-                array('Transparent Pricing', 'No hidden charges'),
-                array('Local Experience', 'UAE-specific campaign management'),
-                array('Fast Turnaround', 'Full-stack developers & certified marketers'),
-            ) as $f) : ?>
-                <div class="whychoose-card">
-                    <h3 class="whychoose-card__title"><?php echo esc_html($f[0]); ?></h3>
-                    <p class="whychoose-card__desc"><?php echo esc_html($f[1]); ?></p>
-                </div>
-            <?php endforeach;
-        endif; ?>
+        <div class="whychoose-grid">
+            <?php
+            $features = itrobes_group_items('whychoose', 4);
+            if ($features) :
+                foreach ($features as $f) :
+                    $icon = $f['icon'] ?? null; ?>
+                    <div class="whychoose-card">
+                        <?php if ($icon) : ?><div class="whychoose-card__icon"><img src="<?php echo esc_url($icon['url']); ?>" alt=""></div><?php endif; ?>
+                        <h3 class="whychoose-card__title"><?php echo esc_html($f['title'] ?? ''); ?></h3>
+                        <p class="whychoose-card__desc"><?php echo esc_html($f['description'] ?? ''); ?></p>
+                    </div>
+                <?php endforeach;
+            else :
+                foreach (array(
+                    array('In-house Experts', 'Full-stack developers & certified marketers'),
+                    array('Transparent Pricing', 'No hidden charges'),
+                    array('Local Experience', 'UAE-specific campaign management'),
+                    array('Fast Turnaround', 'Full-stack developers & certified marketers'),
+                ) as $f) : ?>
+                    <div class="whychoose-card">
+                        <h3 class="whychoose-card__title"><?php echo esc_html($f[0]); ?></h3>
+                        <p class="whychoose-card__desc"><?php echo esc_html($f[1]); ?></p>
+                    </div>
+                <?php endforeach;
+            endif; ?>
+        </div>
     </div>
 </section>
 
@@ -373,14 +371,6 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
         <h2 class="section-title"><?php echo itrobes_field('industries_title', 'Industries We Serve'); ?></h2>
         <div class="industries-header__right">
             <p class="section-desc"><?php echo itrobes_field('industries_description', 'We provide end-to-end IT solutions from development and design to cloud, consulting, and security empowering businesses with technology that drives growth and innovation.'); ?></p>
-            <div class="industries-nav">
-                <button class="industries-nav__btn industries-nav__prev" aria-label="Previous">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </button>
-                <button class="industries-nav__btn industries-nav__next" aria-label="Next">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </button>
-            </div>
         </div>
     </div>
     <div class="industries-slider swiper">

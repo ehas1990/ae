@@ -5,12 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // ========================
     var servicesSliderEl = document.querySelector('.services-slider');
     if (servicesSliderEl && typeof Swiper !== 'undefined') {
-        var totalSlides = servicesSliderEl.querySelectorAll('.swiper-slide').length;
         var servicesSwiper = new Swiper('.services-slider', {
-            slidesPerView: 'auto',
+            slidesPerView: 4.5,
             spaceBetween: 20,
             loop: true,
-            loopAdditionalSlides: totalSlides,
             speed: 800,
             grabCursor: true,
             centeredSlides: false,
@@ -25,13 +23,19 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             breakpoints: {
                 0: {
-                    spaceBetween: 12,
+                    slidesPerView: 1.3,
+                },
+                480: {
+                    slidesPerView: 1.8,
                 },
                 768: {
-                    spaceBetween: 16,
+                    slidesPerView: 2.5,
                 },
                 1024: {
-                    spaceBetween: 20,
+                    slidesPerView: 3.5,
+                },
+                1280: {
+                    slidesPerView: 4.5,
                 },
             },
         });
@@ -153,4 +157,25 @@ document.addEventListener('DOMContentLoaded', function () {
         startAutoSlide();
     }
     startAutoSlide();
+
+    // ========================
+    // Custom Cursor for Projects Section
+    // ========================
+    var customCursor = document.querySelector('.custom-cursor');
+    var projectsSection = document.querySelector('.projects-section');
+
+    if (customCursor && projectsSection) {
+        document.addEventListener('mousemove', function (e) {
+            customCursor.style.left = e.clientX + 'px';
+            customCursor.style.top = e.clientY + 'px';
+        });
+
+        projectsSection.addEventListener('mouseenter', function () {
+            customCursor.style.display = 'block';
+        });
+
+        projectsSection.addEventListener('mouseleave', function () {
+            customCursor.style.display = 'none';
+        });
+    }
 });
