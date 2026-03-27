@@ -169,7 +169,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
     <div class="whychoose-container">
         <div class="whychoose-header">
             <div class="whychoose-header__left">
-                <span class="whychoose-icon"><img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/sparkle-icon.svg" alt=""></span>
+                <span class="whychoose-icon"><img src="<?php echo esc_url(home_url('/wp-content/uploads/2026/03/scribble-final-version-57.svg')); ?>" alt=""></span>
                 <h2 class="section-title"><?php echo itrobes_field('whychoose_title', 'Why Choose Us'); ?></h2>
             </div>
             <p class="section-desc"><?php echo itrobes_field('whychoose_description', 'We provide end-to-end IT solutions — from development and design to cloud, consulting, and security — empowering businesses with technology that drives growth and innovation.'); ?></p>
@@ -184,7 +184,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
                 <div class="whychoose-card">
                     <?php if ($icon) : ?><div class="whychoose-card__icon"><img src="<?php echo esc_url($icon['url']); ?>" alt=""></div><?php endif; ?>
                     <h3 class="whychoose-card__title"><?php echo esc_html($f['title'] ?? ''); ?></h3>
-                    <p class="whychoose-card__desc"><?php echo esc_html($f['description'] ?? ''); ?></p>
+                    <p class="whychoose-card__desc"><?php echo wp_kses_post($f['description'] ?? ''); ?></p>
                 </div>
             <?php endforeach;
         else :
