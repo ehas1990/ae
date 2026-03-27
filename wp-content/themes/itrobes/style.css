@@ -605,7 +605,7 @@ p {
    WHY CHOOSE US SECTION
    ======================== */
 .whychoose-section {
-    padding: 80px 0;
+    padding-top: 80px;
     background: linear-gradient(to right, #f5f3ff 0%, #ede9fe 40%, #fce7f3 100%);
 }
 
@@ -1824,4 +1824,56 @@ p {
     .footer-watermark {
         height: 60px;
     }
+}
+
+/* ========================
+   RESPONSIVE GLOBAL TYPOGRAPHY
+   ======================== */
+
+/* XXL — ≥2580px (already default sizes apply) */
+
+/* XL — ≥1200px (default sizes above apply) */
+
+/* LG — 992px to 1199px */
+@media (max-width: 1199px) {
+    h1 { font-size: 60px; line-height: 78px; }
+    h2 { font-size: 52px; line-height: 68px; }
+    h3 { font-size: 32px; line-height: 131%; }
+    h4 { font-size: 28px; line-height: 42px; }
+    h5 { font-size: 24px; line-height: 32px; }
+    h6 { font-size: 22px; line-height: 30px; }
+    p  { font-size: 20px; line-height: 30px; }
+}
+
+/* MD — 768px to 991px */
+@media (max-width: 991px) {
+    h1 { font-size: 48px; line-height: 62px; }
+    h2 { font-size: 42px; line-height: 56px; }
+    h3 { font-size: 28px; line-height: 131%; }
+    h4 { font-size: 26px; line-height: 38px; }
+    h5 { font-size: 22px; line-height: 30px; }
+    h6 { font-size: 20px; line-height: 28px; }
+    p  { font-size: 18px; line-height: 28px; }
+}
+
+/* SM — 576px to 767px */
+@media (max-width: 767px) {
+    h1 { font-size: 40px; line-height: 52px; }
+    h2 { font-size: 36px; line-height: 48px; }
+    h3 { font-size: 26px; line-height: 131%; }
+    h4 { font-size: 24px; line-height: 34px; }
+    h5 { font-size: 20px; line-height: 28px; }
+    h6 { font-size: 18px; line-height: 26px; }
+    p  { font-size: 16px; line-height: 26px; }
+}
+
+/* XS — below 576px */
+@media (max-width: 575px) {
+    h1 { font-size: 32px; line-height: 42px; }
+    h2 { font-size: 28px; line-height: 38px; }
+    h3 { font-size: 22px; line-height: 131%; }
+    h4 { font-size: 20px; line-height: 30px; }
+    h5 { font-size: 18px; line-height: 26px; }
+    h6 { font-size: 16px; line-height: 24px; }
+    p  { font-size: 15px; line-height: 24px; }
 }

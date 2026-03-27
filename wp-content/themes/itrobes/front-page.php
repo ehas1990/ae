@@ -174,32 +174,32 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
             </div>
             <p class="section-desc"><?php echo itrobes_field('whychoose_description', 'We provide end-to-end IT solutions — from development and design to cloud, consulting, and security — empowering businesses with technology that drives growth and innovation.'); ?></p>
         </div>
-        <div class="whychoose-grid">
-            <?php
-            $features = itrobes_group_items('whychoose', 4);
-            if ($features) :
-                foreach ($features as $f) :
-                    $icon = $f['icon'] ?? null; ?>
-                    <div class="whychoose-card">
-                        <?php if ($icon) : ?><div class="whychoose-card__icon"><img src="<?php echo esc_url($icon['url']); ?>" alt=""></div><?php endif; ?>
-                        <h3 class="whychoose-card__title"><?php echo esc_html($f['title'] ?? ''); ?></h3>
-                        <p class="whychoose-card__desc"><?php echo esc_html($f['description'] ?? ''); ?></p>
-                    </div>
-                <?php endforeach;
-            else :
-                foreach (array(
-                    array('In-house Experts', 'Full-stack developers & certified marketers'),
-                    array('Transparent Pricing', 'No hidden charges'),
-                    array('Local Experience', 'UAE-specific campaign management'),
-                    array('Fast Turnaround', 'Full-stack developers & certified marketers'),
-                ) as $f) : ?>
-                    <div class="whychoose-card">
-                        <h3 class="whychoose-card__title"><?php echo esc_html($f[0]); ?></h3>
-                        <p class="whychoose-card__desc"><?php echo esc_html($f[1]); ?></p>
-                    </div>
-                <?php endforeach;
-            endif; ?>
-        </div>
+    </div>
+    <div class="whychoose-grid">
+        <?php
+        $features = itrobes_group_items('whychoose', 4);
+        if ($features) :
+            foreach ($features as $f) :
+                $icon = $f['icon'] ?? null; ?>
+                <div class="whychoose-card">
+                    <?php if ($icon) : ?><div class="whychoose-card__icon"><img src="<?php echo esc_url($icon['url']); ?>" alt=""></div><?php endif; ?>
+                    <h3 class="whychoose-card__title"><?php echo esc_html($f['title'] ?? ''); ?></h3>
+                    <p class="whychoose-card__desc"><?php echo esc_html($f['description'] ?? ''); ?></p>
+                </div>
+            <?php endforeach;
+        else :
+            foreach (array(
+                array('In-house Experts', 'Full-stack developers & certified marketers'),
+                array('Transparent Pricing', 'No hidden charges'),
+                array('Local Experience', 'UAE-specific campaign management'),
+                array('Fast Turnaround', 'Full-stack developers & certified marketers'),
+            ) as $f) : ?>
+                <div class="whychoose-card">
+                    <h3 class="whychoose-card__title"><?php echo esc_html($f[0]); ?></h3>
+                    <p class="whychoose-card__desc"><?php echo esc_html($f[1]); ?></p>
+                </div>
+            <?php endforeach;
+        endif; ?>
     </div>
 </section>
 
