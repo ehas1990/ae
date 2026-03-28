@@ -5,7 +5,7 @@ window.addEventListener('load', function () {
     if (typeof AOS === 'undefined') return;
 
     // Track scroll direction
-    var lastScrollTop = 0;
+    var lastScrollTop = window.pageYOffset || 0;
     var scrollDirection = 'down';
 
     window.addEventListener('scroll', function () {
@@ -14,18 +14,16 @@ window.addEventListener('load', function () {
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     });
 
-    // Set AOS animation based on scroll direction before each element animates
-    document.querySelectorAll('[data-aos]').forEach(function (el) {
-        el.setAttribute('data-aos', 'fade-up');
-    });
-
+    // Init AOS — use DOMContentLoaded as startEvent won't work inside load
     AOS.init({
         duration: 800,
         easing: 'ease-in-out',
         once: false,
         offset: 100,
-        startEvent: 'load',
     });
+
+    // Force first calculation after init
+    setTimeout(function () { AOS.refresh(); }, 100);
 
     // Update animation direction when elements leave viewport
     var observer = new MutationObserver(function (mutations) {
