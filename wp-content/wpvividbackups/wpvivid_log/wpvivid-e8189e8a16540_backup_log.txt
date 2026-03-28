@@ -1,0 +1,37 @@
+Log created: 2026-03-27 09:16:46
+Type: backup
+[2026-03-27 09:16:47][notice]Start backing up.
+[2026-03-27 09:16:47][notice]server info fcgi:Off max execution time: 300 wp version:6.9.4 php version:8.0.30 db version:10.4.32 php ini:safe_mode: memory_limit:512M memory_get_usage:51.69 MB memory_get_peak_usage:52.50 MB extensions:PDO enabled curl enabled zlib enabled   is_multisite:0
+[2026-03-27 09:16:47][notice]Prepare to backup backup_themes files.
+[2026-03-27 09:16:47][notice]Compressing zip file:localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_themes.part001.zip index:406
+[2026-03-27 09:16:58][notice]Compressing zip file:localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_themes.part001.zip success. index:406 file size:19.27 MB
+[2026-03-27 09:16:58][notice]Backing up backup_themes completed.
+[2026-03-27 09:16:58][notice]Prepare to backup backup_plugin files.
+[2026-03-27 09:16:58][notice]Compressing zip file:localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_plugin.part001.zip index:595
+[2026-03-27 09:17:04][notice]Compressing zip file:localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_plugin.part001.zip success. index:595 file size:6.34 MB
+[2026-03-27 09:17:05][notice]Backing up backup_plugin completed.
+[2026-03-27 09:17:05][notice]Prepare to backup backup_uploads files.
+[2026-03-27 09:17:05][notice]Compressing zip file:localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_uploads.part001.zip index:53
+[2026-03-27 09:17:05][notice]Compressing zip file:localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_uploads.part001.zip success. index:53 file size:3.37 MB
+[2026-03-27 09:17:05][notice]Backing up backup_uploads completed.
+[2026-03-27 09:17:05][notice]Prepare to backup backup_content files.
+[2026-03-27 09:17:05][notice]Compressing zip file:localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_content.part001.zip index:1
+[2026-03-27 09:17:05][notice]Compressing zip file:localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_content.part001.zip success. index:1 file size:144.00 B
+[2026-03-27 09:17:05][notice]Backing up backup_content completed.
+[2026-03-27 09:17:05][notice]Prepare to backup backup_core files.
+[2026-03-27 09:17:07][notice]Compressing zip file:localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_core.part001.zip index:2915
+[2026-03-27 09:18:27][notice]Compressing zip file:localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_core.part001.zip success. index:2915 file size:14.59 MB
+[2026-03-27 09:18:27][notice]Backing up backup_core completed.
+[2026-03-27 09:18:27][notice]Prepare to backup backup_merge files.
+[2026-03-27 09:18:27][notice]Prepare to zip file. file: localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_themes.zip
+[2026-03-27 09:18:27][notice]Adding zip files completed.localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_all.part001.zip, filesize: 19.22 MB
+[2026-03-27 09:18:27][notice]Prepare to zip file. file: localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_plugin.zip
+[2026-03-27 09:18:28][notice]Adding zip files completed.localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_all.part001.zip, filesize: 25.47 MB
+[2026-03-27 09:18:28][notice]Prepare to zip file. file: localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_uploads.zip
+[2026-03-27 09:18:28][notice]Adding zip files completed.localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_all.part001.zip, filesize: 28.84 MB
+[2026-03-27 09:18:28][notice]Prepare to zip file. file: localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_content.zip
+[2026-03-27 09:18:28][notice]Adding zip files completed.localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_all.part001.zip, filesize: 28.84 MB
+[2026-03-27 09:18:28][notice]Prepare to zip file. file: localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_core.zip
+[2026-03-27 09:18:29][notice]Adding zip files completed.localhost_ae.itrobes_wpvivid-e8189e8a16540_2026-03-27-09-16_backup_all.part001.zip, filesize: 42.98 MB
+[2026-03-27 09:18:29][notice]Backing up backup_merge completed.
+[2026-03-27 09:18:29][notice]Backup completed.
