@@ -4,31 +4,43 @@
 window.addEventListener('load', function () {
     if (typeof AOS === 'undefined') return;
 
+    // Track scroll direction
+    var lastScrollTop = 0;
+    var scrollDirection = 'down';
+
+    window.addEventListener('scroll', function () {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        scrollDirection = scrollTop > lastScrollTop ? 'down' : 'up';
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+
+    // Set AOS animation based on scroll direction before each element animates
+    document.querySelectorAll('[data-aos]').forEach(function (el) {
+        el.setAttribute('data-aos', 'fade-up');
+    });
+
     AOS.init({
         duration: 800,
         easing: 'ease-in-out',
         once: false,
         offset: 100,
+        startEvent: 'load',
     });
 
-    // Detect scroll direction and swap fade-up / fade-down
-    var lastScrollTop = 0;
-    var aosSections = document.querySelectorAll('[data-aos="fade-up"], [data-aos="fade-down"]');
-
-    window.addEventListener('scroll', function () {
-        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        var direction = scrollTop > lastScrollTop ? 'down' : 'up';
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-
-        aosSections.forEach(function (el) {
-            if (direction === 'down') {
-                el.setAttribute('data-aos', 'fade-up');
-            } else {
-                el.setAttribute('data-aos', 'fade-down');
+    // Update animation direction when elements leave viewport
+    var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (m) {
+            if (m.type === 'attributes' && m.attributeName === 'class') {
+                var el = m.target;
+                if (!el.classList.contains('aos-animate') && el.hasAttribute('data-aos')) {
+                    el.setAttribute('data-aos', scrollDirection === 'down' ? 'fade-up' : 'fade-down');
+                }
             }
         });
+    });
 
-        AOS.refresh();
+    document.querySelectorAll('[data-aos]').forEach(function (el) {
+        observer.observe(el, { attributes: true, attributeFilter: ['class'] });
     });
 });
 
