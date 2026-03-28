@@ -1194,7 +1194,7 @@ p {
 }
 
 .faq-left {
-    flex: 0 0 576px;
+    flex: 0 0 500px;
     position: relative;
     min-height: 500px;
 }

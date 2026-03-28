@@ -6,8 +6,12 @@ function itrobes_enqueue_assets() {
     wp_enqueue_style('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', array(), '11.0');
     wp_enqueue_script('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), '11.0', true);
 
-    wp_enqueue_style('itrobes-style', get_stylesheet_uri(), array('swiper'), '1.5');
-    wp_enqueue_script('itrobes-main', get_template_directory_uri() . '/assets/js/main.js', array('swiper'), '1.5', true);
+    // AOS (Animate On Scroll)
+    wp_enqueue_style('aos', 'https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css', array(), '2.3.4');
+    wp_enqueue_script('aos', 'https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js', array(), '2.3.4', true);
+
+    wp_enqueue_style('itrobes-style', get_stylesheet_uri(), array('swiper', 'aos'), '1.5');
+    wp_enqueue_script('itrobes-main', get_template_directory_uri() . '/assets/js/main.js', array('swiper', 'aos'), '1.5', true);
 }
 add_action('wp_enqueue_scripts', 'itrobes_enqueue_assets');
 

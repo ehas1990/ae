@@ -65,7 +65,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
 </section>
 
 <!-- Stats Section -->
-<section class="stats-section">
+<section class="stats-section" data-aos="fade-up">
     <div class="stats-container">
         <?php
         $stats = itrobes_merged_items('stat', 4, 'stats_list', array('number', 'label'));
@@ -90,7 +90,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
 
 <!-- Our Services Section -->
 <section class="services-section">
-    <div class="services-container">
+    <div class="services-container" data-aos="fade-up">
         <div class="services-header">
             <h2 class="section-title section-title--light"><?php echo itrobes_field('services_title', 'Our Services'); ?></h2>
             <div class="services-header__right">
@@ -99,7 +99,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
         </div>
     </div>
 
-    <div class="services-slider swiper">
+    <div class="services-slider swiper" data-aos="fade-up" data-aos-delay="200">
         <div class="swiper-wrapper">
             <?php
             $all_services = itrobes_merged_items('service', 6, 'services_list', array('icon', 'title', 'description', 'link', 'image'));
@@ -152,7 +152,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
 </section>
 
 <!-- Our Projects Section -->
-<section class="projects-section">
+<section class="projects-section" data-aos="fade-up">
     <div class="projects-header">
         <h2 class="section-title"><?php echo itrobes_field('projects_title', 'Our Projects'); ?></h2>
         <p class="section-desc"><?php echo itrobes_field('projects_description', 'From intuitive design and seamless development to cloud integration, strategic consulting, and advanced security, our projects showcase end-to-end technology solutions'); ?></p>
@@ -186,7 +186,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
 </section>
 
 <!-- Why Choose Us Section -->
-<section class="whychoose-section">
+<section class="whychoose-section" data-aos="fade-up">
     <div class="whychoose-container">
         <div class="whychoose-header">
             <div class="whychoose-header__left">
@@ -225,7 +225,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
 </section>
 
 <!-- Our Products Section -->
-<section class="products-section">
+<section class="products-section" data-aos="fade-up">
     <div class="products-container">
         <h2 class="section-title section-title--light"><?php echo itrobes_field('products_title', 'Our Products'); ?></h2>
         <?php
@@ -301,7 +301,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
 </section>
 
 <!-- Trusted By Section -->
-<section class="trusted-section">
+<section class="trusted-section" data-aos="fade-up">
     <div class="trusted-container">
         <p class="trusted-subtitle">&ldquo;Trusted by 500+ global clients across 10+ industries.&rdquo;</p>
         <div class="trusted-icon"><img src="<?php echo esc_url(home_url('/wp-content/uploads/2026/03/Gift.svg')); ?>" alt="Trusted icon"></div>
@@ -336,7 +336,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
 </section>
 
 <!-- Testimonials Section -->
-<section class="testimonials-section">
+<section class="testimonials-section" data-aos="fade-up">
     <div class="testimonials-container">
         <h2 class="section-title section-title--light"><?php echo itrobes_field('testimonials_title', 'Testimonials'); ?></h2>
         <div class="testimonials-slider">
@@ -398,7 +398,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
 </section>
 
 <!-- Industries We Serve Section -->
-<section class="industries-section">
+<section class="industries-section" data-aos="fade-up">
     <div class="industries-header">
         <h2 class="section-title"><?php echo itrobes_field('industries_title', 'Industries We Serve'); ?></h2>
         <div class="industries-header__right">
@@ -442,7 +442,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
 </section>
 
 <!-- FAQ Section -->
-<section class="faq-section">
+<section class="faq-section" data-aos="fade-up">
     <div class="faq-container">
         <div class="faq-left">
             <h2 class="section-title section-title--light"><?php echo itrobes_field('faq_title', 'Frequently<br>Asked Questions ?'); ?></h2>
@@ -486,7 +486,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
 </section>
 
 <!-- Latest Insights Section -->
-<section class="insights-section">
+<section class="insights-section" data-aos="fade-up">
     <div class="insights-container">
         <h2 class="section-title"><?php echo itrobes_field('insights_title', 'Latest Insights'); ?></h2>
         <div class="insights-grid">
@@ -532,7 +532,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
 </section>
 
 <!-- CTA Section -->
-<section class="cta-section" style="background-image: url('http://localhost/ae.itrobes/wp-content/uploads/2026/03/background-scale.png');">
+<section class="cta-section" data-aos="fade-up" style="background-image: url('http://localhost/ae.itrobes/wp-content/uploads/2026/03/background-scale.png');">
     <div class="cta-overlay"></div>
     <div class="cta-content">
         <h2 class="cta-title"><?php echo itrobes_field('cta_title', 'Ready to Scale<br>Your Business in the UAE?'); ?></h2>
