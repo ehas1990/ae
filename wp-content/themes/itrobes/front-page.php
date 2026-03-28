@@ -1,17 +1,22 @@
 <?php get_header(); ?>
 
 <?php
+// Set page context for ACF
+$_page_id = get_option('page_on_front');
+
 // Helper: get group field with fallback
 function itrobes_field($name, $fallback = '') {
-    $val = get_field($name);
+    global $_page_id;
+    $val = get_field($name, $_page_id);
     return $val ?: $fallback;
 }
 
-// Helper: get group items (for free ACF - no repeater)
+// Helper: get old group items
 function itrobes_group_items($prefix, $count) {
+    global $_page_id;
     $items = array();
     for ($i = 1; $i <= $count; $i++) {
-        $item = get_field("{$prefix}_{$i}");
+        $item = get_field("{$prefix}_{$i}", $_page_id);
         if ($item && !empty(array_filter((array)$item))) {
             $items[] = $item;
         }
@@ -19,7 +24,23 @@ function itrobes_group_items($prefix, $count) {
     return $items;
 }
 
-$hero_bg = get_field('hero_background');
+// Helper: merge old group items + repeater items into one array
+function itrobes_merged_items($old_prefix, $old_count, $repeater_name, $sub_fields) {
+    global $_page_id;
+    $items = itrobes_group_items($old_prefix, $old_count);
+    if (have_rows($repeater_name, $_page_id)) :
+        while (have_rows($repeater_name, $_page_id)) : the_row();
+            $row = array();
+            foreach ($sub_fields as $f) {
+                $row[$f] = get_sub_field($f);
+            }
+            $items[] = $row;
+        endwhile;
+    endif;
+    return $items;
+}
+
+$hero_bg = get_field('hero_background', $_page_id);
 $hero_bg_url = $hero_bg ? $hero_bg['url'] : get_template_directory_uri() . '/assets/images/hero-bg.jpg';
 $arrow_svg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -32,7 +53,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
         <div class="hero-left">
             <h1 class="hero-title"><?php echo itrobes_field('hero_title', 'Empowering UAE<br>Businesses with<br>Digital Brilliance.'); ?></h1>
             <div class="hero-buttons">
-                <?php $b1 = get_field('hero_button_1'); $b2 = get_field('hero_button_2'); ?>
+                <?php $b1 = get_field('hero_button_1', $_page_id); $b2 = get_field('hero_button_2', $_page_id); ?>
                 <a href="<?php echo esc_url($b1['url'] ?? home_url('/contact-us')); ?>" class="btn-hero-primary"><?php echo esc_html($b1['label'] ?? 'Get a Quote'); ?></a>
                 <a href="<?php echo esc_url($b2['url'] ?? home_url('/portfolio')); ?>" class="btn-hero-secondary"><?php echo esc_html($b2['label'] ?? 'See our Work'); ?></a>
             </div>
@@ -47,8 +68,8 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
 <section class="stats-section">
     <div class="stats-container">
         <?php
-        $stats = itrobes_group_items('stat', 4);
-        if ($stats) :
+        $stats = itrobes_merged_items('stat', 4, 'stats_list', array('number', 'label'));
+        if (!empty($stats)) :
             foreach ($stats as $s) : ?>
                 <div class="stats-item">
                     <span class="stats-number"><?php echo esc_html($s['number']); ?></span>
@@ -81,9 +102,9 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
     <div class="services-slider swiper">
         <div class="swiper-wrapper">
             <?php
-            $services = itrobes_group_items('service', 6);
-            if ($services) :
-                foreach ($services as $svc) :
+            $all_services = itrobes_merged_items('service', 6, 'services_list', array('icon', 'title', 'description', 'link', 'image'));
+            if (!empty($all_services)) :
+                foreach ($all_services as $svc) :
                     $icon = $svc['icon'] ?? null;
                     $img = $svc['image'] ?? null; ?>
                     <div class="swiper-slide">
@@ -138,8 +159,8 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
     </div>
     <div class="projects-grid">
         <?php
-        $projects = itrobes_group_items('project', 4);
-        if ($projects) :
+        $projects = itrobes_merged_items('project', 4, 'projects_list', array('title', 'description', 'image'));
+        if (!empty($projects)) :
             foreach ($projects as $proj) :
                 $img = $proj['image'] ?? null; ?>
                 <div class="project-card">
@@ -177,8 +198,8 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
     </div>
     <div class="whychoose-grid">
         <?php
-        $features = itrobes_group_items('whychoose', 4);
-        if ($features) :
+        $features = itrobes_merged_items('whychoose', 4, 'whychoose_list', array('icon', 'title', 'description'));
+        if (!empty($features)) :
             foreach ($features as $f) :
                 $icon = $f['icon'] ?? null; ?>
                 <div class="whychoose-card">
@@ -208,7 +229,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
     <div class="products-container">
         <h2 class="section-title section-title--light"><?php echo itrobes_field('products_title', 'Our Products'); ?></h2>
         <?php
-        $products = itrobes_group_items('product', 8);
+        $products = itrobes_merged_items('product', 8, 'products_list', array('icon', 'title', 'description', 'image', 'link'));
         $upload_url = home_url('/wp-content/uploads/2026/03/');
         $prod_defaults = array(
             array('title' => 'Project Management', 'icon' => $upload_url . 'icon-p1.svg'),
@@ -287,14 +308,25 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
         <h2 class="trusted-title"><?php echo itrobes_field('trusted_title', 'Trusted by Leaders in UAE & Beyond.'); ?></h2>
         <div class="trusted-logos">
             <?php
-            $has_logos = false;
+            // Old logos
+            $all_logos = array();
             for ($i = 1; $i <= 15; $i++) :
-                $logo = get_field("client_logo_{$i}");
-                if ($logo) : $has_logos = true; ?>
-                    <div class="trusted-logo"><img src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo esc_attr($logo['alt'] ?? ''); ?>"></div>
-                <?php endif;
+                $logo = get_field("client_logo_{$i}", $_page_id);
+                if ($logo) $all_logos[] = $logo;
             endfor;
-            if (!$has_logos) :
+            // Repeater logos
+            if (have_rows('logos_list')) :
+                while (have_rows('logos_list')) : the_row();
+                    $logo = get_sub_field('logo');
+                    if ($logo) $all_logos[] = $logo;
+                endwhile;
+            endif;
+
+            if (!empty($all_logos)) :
+                foreach ($all_logos as $logo) : ?>
+                    <div class="trusted-logo"><img src="<?php echo esc_url($logo['url']); ?>" alt="<?php echo esc_attr($logo['alt'] ?? ''); ?>"></div>
+                <?php endforeach;
+            else :
                 for ($i = 1; $i <= 15; $i++) : ?>
                     <div class="trusted-logo trusted-logo--placeholder"></div>
                 <?php endfor;
@@ -309,8 +341,8 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
         <h2 class="section-title section-title--light"><?php echo itrobes_field('testimonials_title', 'Testimonials'); ?></h2>
         <div class="testimonials-slider">
             <?php
-            $testimonials = itrobes_group_items('testimonial', 3);
-            if ($testimonials) :
+            $testimonials = itrobes_merged_items('testimonial', 3, 'testimonials_list', array('photo', 'name', 'role', 'quote'));
+            if (!empty($testimonials)) :
                 foreach ($testimonials as $ti => $t) :
                     $photo = $t['photo'] ?? null; ?>
                     <div class="testimonial-card<?php echo $ti === 0 ? ' testimonial-card--active' : ''; ?>">
@@ -376,8 +408,8 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
     <div class="industries-slider swiper">
         <div class="swiper-wrapper">
             <?php
-            $industries = itrobes_group_items('industry', 5);
-            if ($industries) :
+            $industries = itrobes_merged_items('industry', 5, 'industries_list', array('title', 'icon', 'image'));
+            if (!empty($industries)) :
                 foreach ($industries as $idx => $ind) :
                     $icon = $ind['icon'] ?? null;
                     $hover_img = $ind['image'] ?? null; ?>
@@ -420,8 +452,8 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
         </div>
         <div class="faq-right">
             <?php
-            $faqs = itrobes_group_items('faq', 5);
-            if ($faqs) :
+            $faqs = itrobes_merged_items('faq', 5, 'faqs_list', array('question', 'answer'));
+            if (!empty($faqs)) :
                 foreach ($faqs as $fi => $faq) : ?>
                     <div class="faq-item<?php echo $fi === 0 ? ' faq-item--active' : ''; ?>">
                         <button class="faq-item__question">
@@ -506,7 +538,7 @@ $arrow_sm = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d
         <h2 class="cta-title"><?php echo itrobes_field('cta_title', 'Ready to Scale<br>Your Business in the UAE?'); ?></h2>
         <p class="cta-desc"><?php echo itrobes_field('cta_description', 'Together, let\'s build your next success story with confidence, creativity, and unwavering dedication to success.'); ?></p>
         <div class="cta-buttons">
-            <?php $cb1 = get_field('cta_button_1'); $cb2 = get_field('cta_button_2'); ?>
+            <?php $cb1 = get_field('cta_button_1', $_page_id); $cb2 = get_field('cta_button_2', $_page_id); ?>
             <a href="<?php echo esc_url($cb1['url'] ?? home_url('/contact-us')); ?>" class="btn-hero-primary"><?php echo esc_html($cb1['label'] ?? 'Start a Project'); ?></a>
             <a href="<?php echo esc_url($cb2['url'] ?? home_url('/contact-us')); ?>" class="btn-hero-secondary"><?php echo esc_html($cb2['label'] ?? 'Get Free Consultation'); ?></a>
         </div>
